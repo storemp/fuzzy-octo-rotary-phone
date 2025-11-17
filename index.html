@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Interaktif Kemasan Cheetos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutral & Green -->
+    <!-- Application Structure Plan: Struktur SPA ini menggunakan navigasi berbasis tab untuk memecah laporan akademik menjadi empat bagian yang mudah dicerna: (1) Ringkasan & Produk, (2) Daya Tarik Visual, (3) Daya Tarik Praktis, dan (4) Kerangka Teori. Struktur ini dipilih untuk menggantikan alur laporan linier (Teori -> Metode -> Hasil) dengan alur eksplorasi yang berpusat pada pengguna. Pengguna dapat langsung melihat produk dan kesimpulan, kemudian memilih untuk mendalami analisis visual atau fungsional sesuai minat. Interaksi utamanya adalah mengklik tab untuk menampilkan/menyembunyikan bagian konten yang relevan, memberikan pengalaman yang bersih dan terfokus. -->
+    <!-- Visualization & Content Choices: 
+      Info: Laporan adalah analisis kualitatif murni. Tidak ada data kuantitatif.
+      Info: Analisis Visual (6 elemen) & Praktis (8 faktor). Goal: Menyajikan temuan kualitatif ini secara terstruktur dan menarik. Viz/Presentation: Kartu (Cards) berbasis HTML/Tailwind dalam tata letak grid responsif (grid-cols-1 md:grid-cols-2 lg:grid-cols-3). Setiap kartu memiliki ikon (Unicode), judul (misal: 'Warna'), dan teks analisis. Interaction: Tidak ada interaksi klik pada kartu, hanya penyajian yang jelas. Justification: Grid kartu lebih mudah dipindai dan secara visual lebih menarik daripada daftar teks panjang, mendukung eksplorasi yang mudah. Method: HTML/Tailwind.
+      Info: Navigasi Antar Bagian. Goal: Memungkinkan pengguna beralih antar tema analisis (Visual, Praktis, Teori). Viz/Presentation: Tombol Tab Navigasi. Interaction: Klik tombol tab. JS akan menambahkan/menghapus kelas 'hidden' pada 'div' konten yang sesuai. Justification: Ini adalah pola UI standar untuk SPA, sangat intuitif, dan menjaga halaman tetap bersih. Method: Vanilla JS (event listeners, classList toggle).
+      Info: Gambar Produk (dari PDF). Goal: Memberikan konteks visual. Viz/Presentation: Tag <img>. Interaction: Tampil statis di tab Ringkasan. Justification: Penting untuk melihat apa yang dianalisis. Method: HTML/Tailwind. (Catatan: Menggunakan placeholder representatif).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .content-section {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+        
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-green-700 mb-2">
+                Analisis Interaktif Desain Kemasan
+            </h1>
+            <p class="text-xl text-gray-600">Studi Kasus: Cheetos Jagung Bakar</p>
+        </header>
+
+        <nav id="tab-nav" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+            <button data-tab="ringkasan" class="tab-button bg-green-600 text-white">Ringkasan</button>
+            <button data-tab="visual" class="tab-button bg-gray-200 text-gray-700">Daya Tarik Visual</button>
+            <button data-tab="praktis" class="tab-button bg-gray-200 text-gray-700">Daya Tarik Praktis</button>
+            <button data-tab="teori" class="tab-button bg-gray-200 text-gray-700">Kerangka Teori</button>
+        </nav>
+
+        <main id="content-wrapper">
+            
+            <section id="content-ringkasan" class="content-section">
+                <h2 class="text-2xl font-semibold text-green-700 mb-6 text-center">Ringkasan & Produk</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                    Bagian ini menampilkan gambaran umum produk yang dianalisis beserta kesimpulan utama dari laporan. Ini memberikan pemahaman cepat tentang temuan kunci sebelum mendalami analisis visual dan fungsional.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white p-6 rounded-lg shadow-md">
+                    <div class="w-full">
+                        <img src="https://placehold.co/600x400/DC2626/FFFFFF?text=Kemasan+Cheetos" alt="Kemasan Cheetos Jagung Bakar" class="rounded-lg object-cover w-full h-auto">
+                        <p class="text-center text-sm text-gray-500 mt-2">Gambar representatif kemasan Cheetos Jagung Bakar.</p>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <h3 class="text-xl font-semibold text-green-700 mb-4">Kesimpulan Utama Laporan</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Berdasarkan analisis yang telah dilakukan, dapat disimpulkan bahwa desain kemasan pada produk Cheetos rasa jagung bakar ini telah menyampaikan citra produknya dengan baik kepada konsumen.
+                            <br><br>
+                            Dengan penggunaan bahan aluminium foil yang ramah lingkungan, kemasan ini didukung dengan baik. Visual yang ditampilkan dari kemasan untuk produknya sangat menarik dan juga dapat menarik minat pembeli dari konsumen.
+                            <br><br>
+                            Secara fungsi, kemasan pada Cheetos ini telah mempertimbangkan dengan baik dari aspek kualitas, ukuran, informasi, serta bentuk yang sesuai dengan makanan ringan atau snack kepada konsumen.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-visual" class="content-section hidden">
+                <h2 class="text-2xl font-semibold text-green-700 mb-6 text-center">Analisis Daya Tarik Visual (Estetika)</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                    Daya tarik visual mencakup semua unsur grafis yang menciptakan kesan dan menarik perhatian konsumen. Berikut adalah analisis elemen visual pada kemasan Cheetos.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🎨</span> Warna
+                        </h3>
+                        <p class="text-gray-700">Didominasi warna merah yang kuat dan menonjol untuk menarik perhatian serta meningkatkan nafsu makan. Terdapat juga warna hijau yang memberikan efek tenang dan rileks.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🔳</span> Bentuk
+                        </h3>
+                        <p class="text-gray-700">Bentuk kemasan menyerupai kotak (rectangle) yang mempunyai kesan aman dan tegas. Kemasan ini juga simpel dan mudah digenggam ataupun dibawa.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">™️</span> Merek atau Logo
+                        </h3>
+                        <p class="text-gray-700">Jenis logotype (wordmark) dengan tipografi unik dari nama "Cheetos". Peletakan di tengah atas dengan ukuran besar agar mudah dilihat oleh konsumen.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🇦</span> Tipografi
+                        </h3>
+                        <p class="text-gray-700">Menggunakan jenis font sans serif, terlihat dari tulisan rasa dan juga di bagian belakang kemasan yang berisikan informasi mengenai produk.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🖌️</span> Ilustrasi
+                        </h3>
+                        <p class="text-gray-700">Ikon hewan cheetah yang memakai kacamata dan skateboard. Terdapat juga gambar bentuk snack dan gambar jagung yang menunjukkan varian rasa jagung bakar.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">📐</span> Tata Letak
+                        </h3>
+                        <p class="text-gray-700">Bagian depan sudah rapi untuk dari segi logo, ilustrasi, dan lainnya. Bagian belakang juga memberikan penempatan informasi yang sudah baik dan teratur.</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="content-praktis" class="content-section hidden">
+                <h2 class="text-2xl font-semibold text-green-700 mb-6 text-center">Analisis Daya Tarik Praktis (Fungsional)</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                    Daya tarik praktis adalah tentang efisiensi kemasan bagi konsumen dan distributor. Berikut adalah analisis faktor-faktor fungsional kemasan Cheetos.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🛡️</span> Faktor Pengamanan
+                        </h3>
+                        <p class="text-gray-700">Menggunakan bahan Aluminium Foil yang menjaga makanan dari cahaya matahari, kedap udara, dan tahan lama. Gas nitrogen di dalam kemasan menjaga agar makanan tidak mudah hancur.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">💰</span> Faktor Ekonomi
+                        </h3>
+                        <p class="text-gray-700">Kemasan menggunakan Aluminium Foil dengan harga terjangkau yang tentunya tetap ekonomis untuk biaya produksi, sehingga tidak melebihi proporsi manfaat produk.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🚚</span> Faktor Pendistribusian
+                        </h3>
+                        <p class="text-gray-700">Mudah didistribusikan. Penggunaan kardus kotak untuk pengiriman jumlah banyak. Bentuk kemasan yang menyerupai kotak memudahkan penyimpanan dan pemajangan produk di toko.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">💬</span> Faktor Komunikasi
+                        </h3>
+                        <p class="text-gray-700">Kemasan sudah mencerminkan citra produknya sebagai produk yang ramah lingkungan serta kemasan yang mudah diingat oleh konsumen.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🖐️</span> Faktor Ergonomi
+                        </h3>
+                        <p class="text-gray-700">Bentuk kemasan mudah dibawa, digenggam, dan mudah dibuka. Tidak bisa ditutup kembali karena dianjurkan untuk sekali makan, tetapi masih bisa disimpan.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">🆔</span> Faktor Identitas
+                        </h3>
+                        <p class="text-gray-700">Identitas produk dapat dengan mudah dikenal oleh konsumen dikarenakan produknya yang berbeda dari yang lain, logonya yang baik, serta ilustrasinya yang menarik.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">📣</span> Faktor Promosi
+                        </h3>
+                        <p class="text-gray-700">Kemasan telah mempromosikan dengan baik (sebagai 'silent sales person'). Hal ini dapat dilihat dari pemberian informasi yang jelas serta ilustrasinya yang dapat menarik perhatian.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                            <span class="text-2xl mr-3">♻️</span> Faktor Lingkungan
+                        </h3>
+                        <p class="text-gray-700">Kemasan terbuat dari Aluminium Foil yang ramah lingkungan. Meskipun hanya bisa sekali pakai, bahan ini dapat didaur ulang.</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="content-teori" class="content-section hidden">
+                <h2 class="text-2xl font-semibold text-green-700 mb-6 text-center">Kerangka Teori & Konsep</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                    Bagian ini berisi definisi dan konsep teoretis dari laporan yang menjadi dasar analisis. Ini memberikan konteks akademik untuk Daya Tarik Visual dan Praktis.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-4">Definisi Kunci</h3>
+                        <p class="text-gray-700 mb-4">
+                            <strong>Kemasan (Sri Julianti, 2014):</strong> Wadah untuk meningkatkan nilai dan fungsi dari sebuah produk.
+                        </p>
+                        <p class="text-gray-700 mb-4">
+                            <strong>Fungsi Kemasan (Hermawan Kartajaya, 1996):</strong> Bukan hanya sebagai wadah pelindung, tetapi dapat menjadi produk yang kemasannya dapat terjual. "Packaging sells what it protects."
+                        </p>
+                        <p class="text-gray-700 mb-4">
+                            <strong>Daya Tarik Visual:</strong> Mencakup semua unsur grafis (warna, bentuk, logo, tipografi, ilustrasi, tata letak) untuk menciptakan kesan yang berhubungan dengan emosi dan psikologis.
+                        </p>
+                        <p class="text-gray-700">
+                            <strong>Daya Tarik Praktis:</strong> Efisiensi dari kemasan yang dipersembahkan kepada konsumen dan distributor (misalnya kemudahan penyimpanan dan peletakan).
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-green-600 mb-4">Faktor & Elemen Analisis</h3>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Elemen Visual:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Warna</li>
+                                <li>Bentuk</li>
+                                <li>Merek atau Logo</li>
+                                <li>Tipografi</li>
+                                <li>Ilustrasi</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Faktor Fungsional (Praktis):</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Faktor Pengamanan</li>
+                                <li>Faktor Ekonomi</li>
+                                <li>Faktor Pendistribusian</li>
+                                <li>Faktor Komunikasi</li>
+                                <li>Faktor Ergonomi</li>
+                                <li>Faktor Identitas</li>
+                                <li>Faktor Promosi</li>
+                                <li>Faktor Lingkungan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('#tab-nav .tab-button');
+            const contentSections = document.querySelectorAll('#content-wrapper .content-section');
+            
+            const activeTabClass = 'bg-green-600';
+            const activeTextClass = 'text-white';
+            const inactiveTabClass = 'bg-gray-200';
+            const inactiveTextClass = 'text-gray-700';
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.dataset.tab;
+
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove(activeTabClass, activeTextClass);
+                        btn.classList.add(inactiveTabClass, inactiveTextClass);
+                    });
+
+                    button.classList.add(activeTabClass, activeTextClass);
+                    button.classList.remove(inactiveTabClass, inactiveTextClass);
+
+                    contentSections.forEach(section => {
+                        if (section.id === 'content-' + targetTab) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
